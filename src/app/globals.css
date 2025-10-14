@@ -1,0 +1,274 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --background-subtle: #fafaff;
+  --foreground: #0f0f0f;
+  --foreground-muted: #6b6b6b;
+  --accent: #8b5cf6;
+  --accent-hover: #7c3aed;
+  --accent-soft: #8b5cf620;
+  --border: #eaeaea;
+  --border-light: #f5f5f5;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
+
+  /* Navbar height - dynamically set by useNavHeight hook */
+  --nav-h: 64px;
+}
+
+/* Dark mode colors - Web3 Aesthetic */
+.dark {
+  --background: #0b0c10;
+  --background-subtle: #111214;
+  --foreground: #f5f5f5;
+  --foreground-muted: #a1a1aa;
+  --accent: #8b5cf6;
+  --accent-hover: #9f7aea;
+  --accent-soft: #8b5cf630;
+  --border: rgba(255, 255, 255, 0.06);
+  --border-light: rgba(255, 255, 255, 0.03);
+  --shadow-sm: 0 2px 8px 0 rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 8px 24px 0 rgba(0, 0, 0, 0.8);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-background-subtle: var(--background-subtle);
+  --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+  --color-border: var(--border);
+  --color-border-light: var(--border-light);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Explicit color mappings for text utilities */
+  --color-text-foreground: var(--foreground);
+  --color-text-muted: var(--foreground-muted);
+  --color-bg-background: var(--background);
+  --color-bg-subtle: var(--background-subtle);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  transition: background-color 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dark mode specific improvements */
+.dark body {
+  background: linear-gradient(to bottom, #0b0c10 0%, #111214 50%, #0b0c10 100%);
+}
+
+@layer utilities {
+  /* Enhanced glassmorphism with Web3 depth */
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+  }
+
+  .dark .glass {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+  }
+
+  .glass-border {
+    border: 1px solid rgba(234, 234, 234, 0.6);
+  }
+
+  .dark .glass-border {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* Hairline divider */
+  .hairline {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--border) 20%,
+      var(--border) 80%,
+      transparent
+    );
+  }
+
+  /* Web3 Panel with depth layering */
+  .panel-dark {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(139, 92, 246, 0.05) inset;
+  }
+
+  .panel-dark-hover {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    box-shadow: 0 8px 32px rgba(139, 92, 246, 0.12),
+      0 0 0 1px rgba(139, 92, 246, 0.1) inset;
+  }
+
+  /* Subtle shadows with brand color */
+  .shadow-premium {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+  }
+
+  .dark .shadow-premium {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.6);
+  }
+
+  /* Focus ring - premium */
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  /* Web3 Glow effects - minimal but present */
+  .glow-accent {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.1);
+  }
+
+  .dark .glow-accent {
+    box-shadow: 0 0 24px rgba(139, 92, 246, 0.15);
+  }
+
+  .glow-accent-strong {
+    box-shadow: 0 0 28px rgba(139, 92, 246, 0.15);
+  }
+
+  .dark .glow-accent-strong {
+    box-shadow: 0 0 32px rgba(139, 92, 246, 0.2);
+  }
+
+  /* Halo glow effect for theme toggle - brand accent */
+  .halo-glow {
+    animation: halo-pulse 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes halo-pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.5);
+    }
+    40% {
+      box-shadow: 0 0 0 10px rgba(139, 92, 246, 0.15);
+    }
+    100% {
+      box-shadow: 0 0 0 12px rgba(139, 92, 246, 0);
+    }
+  }
+
+  .dark .halo-glow {
+    animation: halo-pulse-dark 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes halo-pulse-dark {
+    0% {
+      box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.5);
+    }
+    40% {
+      box-shadow: 0 0 0 10px rgba(139, 92, 246, 0.2);
+    }
+    100% {
+      box-shadow: 0 0 0 12px rgba(139, 92, 246, 0);
+    }
+  }
+
+  /* Text gradient - enhanced */
+  .text-gradient {
+    background: linear-gradient(135deg, #0f0f0f 0%, #8a63f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .dark .text-gradient {
+    background: linear-gradient(135deg, #f5f5f5 0%, #9b7df6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Text gradient for About section - Blue Tech accent */
+  .text-gradient-about {
+    background: linear-gradient(135deg, #0f0f0f 0%, #4f80ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .dark .text-gradient-about {
+    background: linear-gradient(135deg, #f5f5f5 0%, #5b8ef3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Radial gradient background */
+  .radial-gradient {
+    background: radial-gradient(
+      ellipse 800px 600px at 50% 0%,
+      rgba(138, 99, 246, 0.03),
+      transparent 50%
+    );
+  }
+
+  .dark .radial-gradient {
+    background: radial-gradient(
+      ellipse 800px 600px at 50% 0%,
+      rgba(155, 125, 246, 0.05),
+      transparent 50%
+    );
+  }
+
+  /* Force foreground color for text visibility in light mode */
+  .text-foreground {
+    color: var(--foreground) !important;
+  }
+
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    body {
+      transition: none;
+    }
+    .halo-glow {
+      animation: none;
+      box-shadow: 0 0 0 4px rgba(138, 99, 246, 0.1);
+    }
+    .dark .halo-glow {
+      box-shadow: 0 0 0 4px rgba(155, 125, 246, 0.12);
+    }
+  }
+}
+
+/* Scroll margin for anchored sections - prevents navbar overlap */
+section[id],
+div[id] {
+  scroll-margin-top: calc(var(--nav-h, 64px) + 2rem);
+}
+
+/* Additional scroll margin for headings inside sections */
+section[id] h1,
+section[id] h2,
+section[id] h3,
+div[id] h1,
+div[id] h2,
+div[id] h3 {
+  scroll-margin-top: calc(var(--nav-h, 64px) + 2rem);
+}
+
+/* Hero section specific - needs more space */
+#hero {
+  scroll-margin-top: 0;
+}
