@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Providers from "@/components/Providers";
-import ThemeScript from "@/components/ThemeScript";
+import ProvidersV2 from "@/components/ProvidersV2";
+import ThemeScriptV2 from "@/components/ThemeScriptV2";
 import ToastContainer from "@/components/ToastContainer";
 import ScrollTopFab from "@/components/ScrollTopFab";
+import IconSidebarWrapper from "@/components/IconSidebarWrapper";
 
 const inter = Inter({
   variable: "--font-geist-sans",
@@ -40,10 +41,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
-        <ThemeScript />
+        <ThemeScriptV2 />
       </head>
       <body className={`${inter.variable} antialiased`}>
-        <Providers>{children}</Providers>
+        <ProvidersV2>
+          <IconSidebarWrapper />
+          {children}
+        </ProvidersV2>
         <ToastContainer />
         <ScrollTopFab />
       </body>

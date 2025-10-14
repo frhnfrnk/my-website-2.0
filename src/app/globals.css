@@ -4,12 +4,30 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* Core theme tokens - Light mode */
+  --bg: #ffffff;
+  --fg: #111111;
+  --tile: #f2efe6;
+  --tile-hover: #ece8dd;
+  --tile-active: #e7e2d6;
+  --border: rgba(0, 0, 0, 0.06);
+  --border-strong: rgba(0, 0, 0, 0.12);
+
+  /* IconSidebar theme colors - Light mode */
+  --tile-color: #f2efe6; /* ivory tile */
+  --tile-hover-color: #ece8dd; /* hover state */
+  --tile-active-color: #e7e2d6; /* active state */
+  --pill-color: #efece3; /* label pill bg */
+  --pill-fg-color: #1a1a1a; /* label text */
+  --icon-color: #8b857c; /* muted icon */
+  --icon-strong-color: #111111; /* active/hover icon */
+
+  /* Legacy variables for compatibility */
   --background-subtle: #fafaff;
   --foreground-muted: #6b6b6b;
   --accent: oklch(0.97 0 0);
   --accent-hover: #7c3aed;
   --accent-soft: #8b5cf620;
-  --border: oklch(0.922 0 0);
   --border-light: #f5f5f5;
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
   --shadow-md: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
@@ -50,6 +68,14 @@
 
 /* Dark mode colors - Web3 Aesthetic */
 .dark {
+  /* Core theme tokens - Dark mode */
+  --bg: #0b0c10;
+  --fg: #f5f6f7;
+  --tile: #232326;
+  --tile-hover: #2a2a2e;
+  --tile-active: #313135;
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.18);
   --background: oklch(0.145 0 0);
   --background-subtle: #111214;
   --foreground: oklch(0.985 0 0);
@@ -61,6 +87,16 @@
   --border-light: rgba(255, 255, 255, 0.03);
   --shadow-sm: 0 2px 8px 0 rgba(0, 0, 0, 0.6);
   --shadow-md: 0 8px 24px 0 rgba(0, 0, 0, 0.8);
+
+  /* IconSidebar theme colors - Dark mode */
+  --tile-color: #232326; /* charcoal tile */
+  --tile-hover-color: #2a2a2e; /* hover state */
+  --tile-active-color: #2f2f34; /* active state */
+  --pill-color: #2d2d32; /* label pill bg */
+  --pill-fg-color: #eaeaea; /* label text */
+  --icon-color: #a3a3a3; /* muted icon */
+  --icon-strong-color: #ffffff; /* active/hover icon */
+
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
@@ -88,6 +124,27 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+/* Smooth themed transitions */
+.themed-transition,
+.themed-transition * {
+  transition: background-color 0.22s ease, color 0.22s ease,
+    border-color 0.22s ease, box-shadow 0.22s ease, fill 0.22s ease,
+    stroke 0.22s ease;
+}
+
+/* Disable transitions for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .themed-transition,
+  .themed-transition * {
+    transition-duration: 0.12s !important;
+  }
+}
+
+/* Prevent layout shift during theme transition */
+.themed-transition {
+  will-change: auto;
 }
 
 @theme inline {
