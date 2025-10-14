@@ -13,7 +13,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Farhan Franaka — Frontend Engineer",
+  title: "by Farhan Franaka",
   description:
     "Frontend Engineer & Web Developer specializing in modern web technologies and elegant user experiences.",
   keywords: [
