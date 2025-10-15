@@ -59,7 +59,9 @@ export default function ExperiencePage() {
   });
 
   // Safely extract experiences list - handle both undefined and nested data
-  const experiences: Experience[] = Array.isArray(data?.data) ? data.data : [];
+  const experiences: Experience[] = Array.isArray(data?.data)
+    ? (data.data as Experience[])
+    : [];
 
   // Delete mutation
   const deleteMutation = useMutation({

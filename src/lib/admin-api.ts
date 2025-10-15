@@ -11,6 +11,22 @@ interface FetchOptions extends RequestInit {
   params?: Record<string, string | number | boolean | undefined>;
 }
 
+// API Response Types
+interface PaginatedResponse<T> {
+  data: T[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+  };
+}
+
+interface SingleResponse<T> {
+  data: T;
+  message?: string;
+}
+
 /**
  * Base fetch wrapper with error handling
  */
@@ -63,24 +79,25 @@ export const projectsAPI = {
     limit?: number;
     featured?: boolean;
     stack?: string;
-  }) => fetchAPI("/projects", { params }),
+  }) => fetchAPI<PaginatedResponse<unknown>>("/projects", { params }),
 
-  getBySlug: (slug: string) => fetchAPI(`/projects/${slug}`),
+  getBySlug: (slug: string) =>
+    fetchAPI<SingleResponse<unknown>>(`/projects/${slug}`),
 
   create: (data: unknown) =>
-    fetchAPI("/projects", {
+    fetchAPI<SingleResponse<unknown>>("/projects", {
       method: "POST",
       body: JSON.stringify(data),
     }),
 
   update: (slug: string, data: unknown) =>
-    fetchAPI(`/projects/${slug}`, {
+    fetchAPI<SingleResponse<unknown>>(`/projects/${slug}`, {
       method: "PATCH",
       body: JSON.stringify(data),
     }),
 
   delete: (slug: string) =>
-    fetchAPI(`/projects/${slug}`, {
+    fetchAPI<{ message: string }>(`/projects/${slug}`, {
       method: "DELETE",
     }),
 };
@@ -91,24 +108,25 @@ export const projectsAPI = {
 
 export const experienceAPI = {
   getAll: (params?: { page?: number; limit?: number }) =>
-    fetchAPI("/experience", { params }),
+    fetchAPI<PaginatedResponse<unknown>>("/experience", { params }),
 
-  getBySlug: (slug: string) => fetchAPI(`/experience/${slug}`),
+  getBySlug: (slug: string) =>
+    fetchAPI<SingleResponse<unknown>>(`/experience/${slug}`),
 
   create: (data: unknown) =>
-    fetchAPI("/experience", {
+    fetchAPI<SingleResponse<unknown>>("/experience", {
       method: "POST",
       body: JSON.stringify(data),
     }),
 
   update: (slug: string, data: unknown) =>
-    fetchAPI(`/experience/${slug}`, {
+    fetchAPI<SingleResponse<unknown>>(`/experience/${slug}`, {
       method: "PATCH",
       body: JSON.stringify(data),
     }),
 
   delete: (slug: string) =>
-    fetchAPI(`/experience/${slug}`, {
+    fetchAPI<{ message: string }>(`/experience/${slug}`, {
       method: "DELETE",
     }),
 };
@@ -146,12 +164,13 @@ export const techAPI = {
 // ============================================
 
 export const sectionsAPI = {
-  getAll: () => fetchAPI("/sections"),
+  getAll: () => fetchAPI<{ data: unknown[] }>("/sections"),
 
-  getByKey: (key: string) => fetchAPI("/sections", { params: { key } }),
+  getByKey: (key: string) =>
+    fetchAPI<SingleResponse<unknown>>("/sections", { params: { key } }),
 
   update: (data: unknown) =>
-    fetchAPI("/sections", {
+    fetchAPI<SingleResponse<unknown>>("/sections", {
       method: "PATCH",
       body: JSON.stringify(data),
     }),
@@ -163,7 +182,7 @@ export const sectionsAPI = {
 
 export const messagesAPI = {
   getAll: (params?: { page?: number; limit?: number }) =>
-    fetchAPI("/contact", { params }),
+    fetchAPI<PaginatedResponse<unknown>>("/contact", { params }),
 };
 
 // ============================================

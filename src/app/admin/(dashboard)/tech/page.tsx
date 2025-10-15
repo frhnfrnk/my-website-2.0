@@ -68,7 +68,7 @@ export default function TechPage() {
   });
 
   // Safely extract tech list - handle both undefined and nested data
-  const techList: Tech[] = Array.isArray(data?.data) ? data.data : [];
+  const techList: Tech[] = Array.isArray(data) ? (data as Tech[]) : [];
 
   // Delete mutation
   const deleteMutation = useMutation({

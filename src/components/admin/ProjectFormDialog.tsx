@@ -55,7 +55,7 @@ interface ProjectFormDialogProps {
     slug: string;
     title: string;
     summary: string;
-    description: string;
+    description?: string;
     stack: string[];
     cover?: string;
     links: {

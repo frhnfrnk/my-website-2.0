@@ -30,6 +30,7 @@ interface Project {
   slug: string;
   title: string;
   summary: string;
+  description?: string;
   stack: string[];
   featured?: boolean;
   publishedAt: string;
@@ -53,7 +54,7 @@ export default function AdminProjectsPage() {
     queryFn: () => projectsAPI.getAll({ limit: 100 }),
   });
 
-  const projects = data?.data || [];
+  const projects = (data?.data || []) as Project[];
 
   // Filter projects by search
   const filteredProjects = projects.filter(

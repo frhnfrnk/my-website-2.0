@@ -45,10 +45,14 @@ export default function MessagesPage() {
   const queryClient = useQueryClient();
 
   // Fetch messages
-  const { data: messages = [], isLoading } = useQuery<Message[]>({
+  const { data, isLoading } = useQuery({
     queryKey: ["admin-messages"],
-    queryFn: () => messagesAPI.getAll() as Promise<Message[]>,
+    queryFn: () => messagesAPI.getAll(),
   });
+
+  const messages: Message[] = Array.isArray(data?.data)
+    ? (data.data as Message[])
+    : [];
 
   // Delete mutation (if you add delete endpoint)
   const deleteMutation = useMutation({

@@ -33,7 +33,7 @@ export default function SectionsPage() {
       const results = await Promise.all(
         SECTION_KEYS.map((key) => sectionsAPI.getByKey(key))
       );
-      return results as Section[];
+      return results.map((result) => (result as { data: Section }).data);
     },
   });
 
